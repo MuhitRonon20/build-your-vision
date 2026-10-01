@@ -265,7 +265,7 @@ export function Services() {
           {active !== null && (
             <motion.img
               key={active}
-              src={services[active].img}
+              src={services[active]?.img}
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
               initial={{ clipPath: "inset(100% 0 0 0)" }}
