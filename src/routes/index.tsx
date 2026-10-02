@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Footer, Intro, Nav } from "@/components/club/Chrome";
+import { BookingProvider } from "@/components/club/BookingOverlay";
 import {
   Booking,
   CraftStory,
@@ -35,6 +36,7 @@ function Index() {
   return (
     <main className="overflow-x-clip">
       <Intro />
+      <BookingProvider>
       <Nav />
       <Hero />
       <Philosophy />
@@ -47,6 +49,7 @@ function Index() {
       <Booking />
       <Location />
       <Footer />
+      </BookingProvider>
     </main>
   );
 }
