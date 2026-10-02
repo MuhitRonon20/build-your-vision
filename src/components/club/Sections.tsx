@@ -15,9 +15,11 @@ import shave from "@/assets/shave.jpg";
 import tools from "@/assets/tools.jpg";
 import beard from "@/assets/beard.jpg";
 import { MaskLine, ParallaxImage, Reveal, ScrollWord, ease } from "./primitives";
+import { useBooking } from "./BookingOverlay";
 
 /* ---------------- HERO ---------------- */
 export function Hero() {
+  const { open: openBooking } = useBooking();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
@@ -75,9 +77,13 @@ export function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 2.8 }}
           >
-            <a href="#book" className="label bg-ivory px-8 py-5 text-ink transition-colors duration-500 hover:bg-brass">
+            <button
+              type="button"
+              onClick={openBooking}
+              className="label bg-ivory px-8 py-5 text-ink transition-colors duration-500 hover:bg-brass"
+            >
               Book an appointment
-            </a>
+            </button>
             <a href="#philosophy" className="label link-line text-ivory">
               Explore
             </a>
@@ -282,6 +288,7 @@ export function Services() {
 
 /* ---------------- EXPERIENCE ---------------- */
 export function Experience() {
+  const { open: openBooking } = useBooking();
   return (
     <section id="experience" className="relative bg-charcoal py-40">
       <div className="mx-auto grid max-w-[1600px] gap-16 px-6 md:grid-cols-12 md:px-12">
@@ -306,9 +313,13 @@ export function Experience() {
               chosen because they work, not because they shout.
             </p>
           </div>
-          <a href="#book" className="label link-line mt-14 inline-block text-brass">
+          <button
+            type="button"
+            onClick={openBooking}
+            className="label link-line mt-14 inline-block text-brass"
+          >
             Reserve your chair
-          </a>
+          </button>
         </div>
       </div>
     </section>
@@ -416,6 +427,7 @@ export function Gallery() {
 
 /* ---------------- BOOKING ---------------- */
 export function Booking() {
+  const { open: openBooking } = useBooking();
   return (
     <section id="book" className="relative overflow-hidden bg-ivory px-6 py-40 text-ink md:px-12 md:py-56">
       <div className="mx-auto max-w-[1600px]">
@@ -432,9 +444,13 @@ export function Booking() {
             minutes.
           </p>
           <div className="flex flex-wrap items-center gap-10">
-            <a href="tel:+493012345678" className="label bg-ink px-10 py-6 text-ivory transition-colors duration-500 hover:bg-charcoal">
+            <button
+              type="button"
+              onClick={openBooking}
+              className="label bg-ink px-10 py-6 text-ivory transition-colors duration-500 hover:bg-charcoal"
+            >
               Book an appointment
-            </a>
+            </button>
             <a href="tel:+493012345678" className="label link-line">+49 30 1234 5678</a>
           </div>
         </div>
