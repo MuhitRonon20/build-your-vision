@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { ease } from "./primitives";
+import { useBooking } from "./BookingOverlay";
 
 export const BRAND = "Maison Kessler";
 
@@ -44,6 +45,7 @@ const links = [
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { open: openBooking } = useBooking();
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 60);
     on();
@@ -75,9 +77,13 @@ export function Nav() {
               </a>
             ))}
           </nav>
-          <a href="#book" className="label link-line hidden text-brass lg:inline-block">
+          <button
+            type="button"
+            onClick={openBooking}
+            className="label link-line hidden text-brass lg:inline-block"
+          >
             Book appointment
-          </a>
+          </button>
           <button
             onClick={() => setOpen(true)}
             className="label text-ivory lg:hidden"
@@ -121,13 +127,16 @@ export function Nav() {
                 </motion.a>
               ))}
             </nav>
-            <a
-              href="#book"
-              onClick={() => setOpen(false)}
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(false);
+                openBooking();
+              }}
               className="label mt-12 bg-ivory py-5 text-center text-ink"
             >
               Book appointment
-            </a>
+            </button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -136,6 +145,7 @@ export function Nav() {
 }
 
 export function Footer() {
+  const { open: openBooking } = useBooking();
   return (
     <footer className="bg-ink px-6 pb-10 pt-32 md:px-12">
       <div className="mx-auto max-w-[1600px]">
@@ -147,7 +157,7 @@ export function Footer() {
           <div className="flex gap-8">
             <a href="#" className="label link-line">Instagram</a>
             <a href="#" className="label link-line">Journal</a>
-            <a href="#book" className="label link-line text-brass">Reserve</a>
+            <button type="button" onClick={openBooking} className="label link-line text-brass">Reserve</button>
           </div>
         </div>
       </div>
