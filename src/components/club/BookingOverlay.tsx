@@ -88,7 +88,7 @@ function Field({
   htmlFor,
 }: {
   label: string;
-  error?: string;
+  error?: string | undefined;
   children: ReactNode;
   htmlFor?: string;
 }) {
@@ -228,8 +228,9 @@ function Calendar({
           </span>
         ))}
         {cells.map((d, i) => {
-          if (!d) return <span key={`e${i}`} />;
-          const ok = isBookable(d);
+          if (!d) return <span key={`e${i}`} aria-hidden />;
+          const day: Date = d;
+          const ok = isBookable(day);
           const selected = sameDay(d, value);
           return (
             <button
